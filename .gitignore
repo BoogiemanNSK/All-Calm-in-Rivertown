@@ -1,5 +1,6 @@
 # Third-party assets
 /[Aa]ssets/External
+/[Aa]ssets/External.meta
 
 # Unity 'build' folders 
 /[Ll]ibrary/
