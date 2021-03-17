@@ -1,5 +1,9 @@
 ﻿public static class Constants
 {
+    
+    // Tags
+    public const string PlayerTag = "Player";
+    public const string EnemyTag = "Enemy";
         
     // Scene Names
     public const string SnMenu = "Menu";
