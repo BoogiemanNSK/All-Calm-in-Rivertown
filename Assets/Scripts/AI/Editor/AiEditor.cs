@@ -1,11 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
+﻿using UnityEditor;
+using UnityEngine;
 
-namespace BreadcrumbAi{
+namespace Ai.Editor{
 	[CustomEditor(typeof(Ai.Scripts.Ai))]
-	public class AiEditor : Editor {
+	public class AiEditor : UnityEditor.Editor {
 	
 		private Ai.Scripts.Ai ai;
 		private Texture2D iconType, iconAvoid, iconAiOptions, iconActions, iconHealth, iconFollow, iconWander, iconPatrol, iconSpeed, iconVision;
