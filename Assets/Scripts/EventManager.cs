@@ -23,17 +23,7 @@ public static class EventManager {
             _eventDictionary.Add(eventName, thisEvent);
         }
     }
-
-    public static void StopListening(string eventName, Action<string> listener) {
-        if (!_eventDictionary.TryGetValue(eventName, out var thisEvent)) return;
-
-        // Remove event from the existing one
-        thisEvent -= listener;
-
-        // Update the Dictionary
-        _eventDictionary[eventName] = thisEvent;
-    }
-
+    
     public static void TriggerEvent(string eventName, string eventParam) {
         if (_eventDictionary.TryGetValue(eventName, out var thisEvent)) {
             thisEvent.Invoke(eventParam);

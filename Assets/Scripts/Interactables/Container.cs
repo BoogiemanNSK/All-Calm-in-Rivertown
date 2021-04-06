@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using GameSystems;
+using UI;
+using UnityEngine;
 
 namespace Interactables {
 
@@ -9,6 +11,9 @@ namespace Interactables {
         [SerializeField] private AnimationClip OpeningAnimation;
         [SerializeField] private AnimationClip ClosingAnimation;
 
+        private Inventory _inventory;
+        private ContainerScreen _containerUI;
+        
         public bool IsOpened { get; private set; }
 
         protected override void Awake() {
