@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace UI {
 
-    public class ContainerScreen : MonoBehaviour {
+    public class ContainerScreen : DescriptionScreen {
 
-        [SerializeField] private GameObject Screen;
+        [Header("Containers UI")]
         [SerializeField] private Transform PlayerItemsGrid;
         [SerializeField] private Transform ContainerItemsGrid;
         
-        private Inventory _playerInventory;
         private Inventory _currentContainerInventory;
 
         // Open container screen for some specific container inventory

@@ -6,23 +6,10 @@ namespace UI {
 
     public class InventoryScreen : MonoBehaviour {
 
-        [SerializeField] private GameObject Screen;
+        [Header("Inventory UI")]
         [SerializeField] private Transform ItemsGrid;
-        [SerializeField] private InventoryItem ItemPrefab;
         
-        [Header("Item Description")]
-        [SerializeField] private Text ChosenItemName;
-        [SerializeField] private Text ChosenItemDesc;
-        [SerializeField] private Text ChosenItemPrice;
-
-        private Inventory _playerInventory;
         private bool _isOpened;
-        
-        public void SetDescription(string itemName, string desc, string price) {
-            ChosenItemName.text = itemName;
-            ChosenItemDesc.text = desc;
-            ChosenItemPrice.text = price;
-        }
 
         private void Awake() {
             _isOpened = false;

@@ -19,6 +19,7 @@ namespace Interactables {
         protected override void Awake() {
             base.Awake();
             IsOpened = false;
+            _containerUI = FindObjectOfType<ContainerScreen>();
         }
         
         public override void Use() {
@@ -27,7 +28,8 @@ namespace Interactables {
 
             IsOpened = !IsOpened;
 
-            // TODO Open or close container UI
+            // Open or close container UI
+            _containerUI.OpenContainerScreen(_inventory);
         }
 
     }
