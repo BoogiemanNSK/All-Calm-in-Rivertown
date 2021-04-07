@@ -28,6 +28,11 @@ namespace Logic {
                 EventManager.TriggerEvent(Constants.InventoryKeyPressedEvent, "");
             }
             
+            // Pause Menu
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                EventManager.TriggerEvent(Constants.PauseKeyPressedEvent, "");
+            }
+            
         }
 
         private void Interact() {

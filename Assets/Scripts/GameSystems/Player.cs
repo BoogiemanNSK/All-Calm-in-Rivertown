@@ -10,7 +10,7 @@ namespace GameSystems {
         [SerializeField] private Item[] InitialItems;
 
         private void Awake() {
-            Inventory = new Inventory(InitialItems);
+            Inventory = new Inventory(Constants.PlayerContainerName, InitialItems);
         }
 
     }

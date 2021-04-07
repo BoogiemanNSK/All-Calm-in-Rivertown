@@ -143,6 +143,8 @@ MonoBehaviour:
   _outlines:
   - {fileID: 2372199052039424560}
   - {fileID: 2372199052039449490}
+  ContainerName: Old Chest
+  InitialItemsList: []
   Animations: {fileID: 2372199052039424562}
   OpeningAnimation: {fileID: 7400000, guid: 2939a58ca3236c64c8d273c05b6f4735, type: 2}
   ClosingAnimation: {fileID: 7400000, guid: de5eb93dd50d7c043b53bda4ee37cd9b, type: 2}

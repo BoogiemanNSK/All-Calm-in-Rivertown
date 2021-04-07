@@ -11,6 +11,7 @@ namespace Items {
         public int ArmorPoints => _armorPoints;
 
         public override void Use() {
+            IsEquipped = true;
             throw new System.NotImplementedException();
         }
 

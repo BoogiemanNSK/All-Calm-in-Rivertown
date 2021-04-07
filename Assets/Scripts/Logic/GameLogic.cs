@@ -5,20 +5,23 @@ namespace Logic {
 
     public class GameLogic : MonoBehaviour {
 
-        public static bool GameIsPaused;
+        public static GameLogic Instance;
+        public bool GameIsPaused { get; private set; }
 
         private void Awake() {
-            GameIsPaused = false;
+            Instance = this;
+            ResumeGame();
             EventManager.InitDict();
         }
 
         public void ResumeGame() {
-            Time.timeScale = 1.0f;
+            Cursor.visible = false;
             GameIsPaused = false;
         }
 
+        // TODO Forbid player movement during pause
         public void PauseGame() {
-            Time.timeScale = 0.0f;
+            Cursor.visible = true;
             GameIsPaused = true;
         }
 

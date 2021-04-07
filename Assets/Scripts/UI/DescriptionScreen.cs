@@ -16,14 +16,22 @@ namespace UI {
         [SerializeField] protected Text ChosenItemDesc;
         [SerializeField] protected Text ChosenItemPrice;
 
-        protected Inventory _playerInventory;
-        protected InventoryItem _selectedItem
+        [Header("Description Screen Button")] 
+        [SerializeField] protected Button UseButton;
+        [SerializeField] protected Text ButtonText;
         
-        public void SelectItem(Item itemObject, InventoryItem uiObject) {
-            _selectedItem = itemObject;
+        protected Inventory PlayerInventory;
+        protected InventoryItem SelectedItem;
+
+        protected virtual void Start() {
+            PlayerInventory = FindObjectOfType<Player>().Inventory;
+        }
+
+        public virtual void SelectItem(Item itemObject, InventoryItem uiObject) {
+            SelectedItem = uiObject;
             ChosenItemName.text = itemObject.Name;
             ChosenItemDesc.text = itemObject.Description;
-            ChosenItemPrice.text = itemObject.Price;
+            ChosenItemPrice.text = itemObject.Price.ToString();
         }
 
     }

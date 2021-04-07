@@ -11,6 +11,7 @@ namespace Items {
         public int Damage => _damage;
 
         public override void Use() {
+            IsEquipped = true;
             throw new System.NotImplementedException();
         }
 
