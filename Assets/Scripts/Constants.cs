@@ -23,14 +23,17 @@ public static class Constants {
     public const int InventoryMaxSize = 20;
 
     // In-Game Text
+    public const string TalkText = "Talk";
     public const string OpenContainerText = "Loot";
     public const string CloseContainerText = "Close";
     public const string InteractWithText = "Use";
     public const string CollectItemText = "Take";
-    public const string PlayerContainerName = "Player";
-
     public const string ContainerTake = "Take";
     public const string ContainerStash = "Stash";
+    public const string TradingBuy = "Buy";
+    public const string TradingSell = "Sell";
+    public const string TradingCancelBuy = "Don't Buy";
+    public const string TradingCancelSell = "Don't Sell";
 
     public static readonly Dictionary<Type, string> ItemTypeToUseBtnText = new Dictionary<Type, string> {
         { typeof(Weapon), "Equip" },

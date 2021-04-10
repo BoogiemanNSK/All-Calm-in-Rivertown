@@ -91,6 +91,8 @@ namespace Logic {
                     return Constants.CollectItemText;
                 case Usable _:
                     return Constants.InteractWithText;
+                case Talkable _:
+                    return Constants.TalkText;
                 default:
                     return "";
             }

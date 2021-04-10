@@ -3,12 +3,11 @@ using Logic;
 using UnityEngine;
 
 namespace UI {
-
     public class InventoryScreen : DescriptionScreen {
 
-        [Header("Inventory UI")]
+        [Header("Inventory UI")] 
         [SerializeField] private Transform ItemsGrid;
-        
+
         private bool _isOpened;
 
         private void Awake() {
@@ -22,7 +21,7 @@ namespace UI {
 
         public override void SelectItem(Item itemObject, InventoryItem uiObject) {
             base.SelectItem(itemObject, uiObject);
-            
+
             if (itemObject is Other || itemObject.Equipped) {
                 UseButton.gameObject.SetActive(false);
             }
@@ -40,32 +39,15 @@ namespace UI {
         private void OpenInventory() {
             if (GameLogic.Instance.GameIsPaused) return;
             GameLogic.Instance.PauseGame();
-            
+
             Screen.SetActive(true);
             _isOpened = true;
 
-            var itemsCount = PlayerInventory.ItemsList.Count;
-            
-            // First item select
-            if (itemsCount > 0) {
-                var createdItem = Instantiate(ItemPrefab, ItemsGrid);
-                createdItem.SetItem(PlayerInventory.ItemsList[0]);
-                createdItem.SetParent(this);
-                createdItem.OnClick();
+            var firstItem = FillGridWithInventory(this, ItemsGrid, PlayerInventory, ItemPrefab);
+            if (firstItem) {
+                firstItem.OnClick();
                 // TODO Highlight clicked item
                 // TODO Highlight equipped items
-            }
-            
-            for (var i = 1; i < itemsCount; i++) {
-                var createdItem = Instantiate(ItemPrefab, ItemsGrid);
-                createdItem.SetItem(PlayerInventory.ItemsList[i]);
-                createdItem.SetParent(this);
-            }
-
-            for (var i = itemsCount; i < Constants.InventoryMaxSize; i++) {
-                var createdItem = Instantiate(ItemPrefab, ItemsGrid);
-                createdItem.SetEmpty();
-                createdItem.SetParent(this);
             }
         }
 
@@ -85,5 +67,4 @@ namespace UI {
         }
 
     }
-
 }

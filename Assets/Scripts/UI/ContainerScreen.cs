@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using GameSystems;
+﻿using GameSystems;
 using Items;
 using Logic;
 using UnityEngine;
@@ -63,45 +62,17 @@ namespace UI {
             
             _openedContainerInventory = otherContainer;
             Screen.SetActive(true);
-            
-            var itemsCount = PlayerInventory.ItemsList.Count;
-            
-            // First item select
-            if (itemsCount > 0) {
-                var createdItem = Instantiate(ItemPrefab, PlayerItemsGrid);
-                createdItem.SetItem(PlayerInventory.ItemsList[0]);
-                createdItem.SetParent(this);
-                createdItem.OnClick();
+
+            // Fill player's inventory UI
+            var firstItem = FillGridWithInventory(this, PlayerItemsGrid, PlayerInventory, ItemPrefab);
+            if (firstItem) {
+                firstItem.OnClick();
                 // TODO Highlight clicked item
                 // TODO Highlight equipped items
             }
-            
-            for (var i = 1; i < itemsCount; i++) {
-                var createdItem = Instantiate(ItemPrefab, PlayerItemsGrid);
-                createdItem.SetItem(PlayerInventory.ItemsList[i]);
-                createdItem.SetParent(this);
-            }
 
-            for (var i = itemsCount; i < Constants.InventoryMaxSize; i++) {
-                var createdItem = Instantiate(ItemPrefab, PlayerItemsGrid);
-                createdItem.SetEmpty();
-                createdItem.SetParent(this);
-            }
-
-            _openedContainerInventory = otherContainer;
-            itemsCount = otherContainer.ItemsList.Count;
-            
-            for (var i = 0; i < itemsCount; i++) {
-                var createdItem = Instantiate(ItemPrefab, ContainerItemsGrid);
-                createdItem.SetItem(otherContainer.ItemsList[i]);
-                createdItem.SetParent(this);
-            }
-
-            for (var i = itemsCount; i < Constants.InventoryMaxSize; i++) {
-                var createdItem = Instantiate(ItemPrefab, ContainerItemsGrid);
-                createdItem.SetEmpty();
-                createdItem.SetParent(this);
-            }
+            // Fill container's inventory UI
+            FillGridWithInventory(this, ContainerItemsGrid, otherContainer, ItemPrefab);
 
             PlayerInventoryName.text = PlayerInventory.InventoryName;
             ContainerInventoryName.text = otherContainer.InventoryName;
@@ -118,16 +89,6 @@ namespace UI {
             
             Screen.SetActive(false);
             GameLogic.Instance.ResumeGame();
-        }
-
-        private static InventoryItem InsertToFirstFreeCell(IEnumerable grid, Item item) {
-            foreach (Transform cell in grid) {
-                var itemCell = cell.gameObject.GetComponent<InventoryItem>();
-                if (itemCell.InternalItem != null) continue;
-                itemCell.SetItem(item);
-                return itemCell;
-            }
-            return null;
         }
 
     }

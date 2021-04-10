@@ -1,10 +1,4 @@
-﻿namespace QuestGenerator
-{
-    
+﻿namespace QuestGenerator {
     // PetriNet Structure
-    public class Quest
-    {
-        
-    }
-    
+    public class Quest { }
 }

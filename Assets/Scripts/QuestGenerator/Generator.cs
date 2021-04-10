@@ -20,7 +20,7 @@ namespace QuestGenerator
             // TODO Create a generator and attach chosen features to it
         }
 
-        public Quest GenerateNewQuest(NpcInfo questProvider, PlayerInfo playerImage, ReputationInfo playerReputation)
+        public Quest GenerateNewQuest(NpcInfo questProvider, PlayerInfo playerImage)
         {
             // TODO Generate a quest 
             return null;

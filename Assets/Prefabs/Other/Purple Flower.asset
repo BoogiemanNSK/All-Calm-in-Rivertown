@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb22fdf140248af9ddfe61514459ea8, type: 3}
   m_Name: Purple Flower
   m_EditorClassIdentifier: 
-  _name: 
-  _description: 
-  _price: 0
-  _isUsable: 0
-  _iconSprite: {fileID: 0}
+  _name: Purple Flower
+  _description: Just a thing, you can easily find around here.
+  _price: 2
+  _iconSprite: {fileID: 21300000, guid: 9343ecc466b190245b24789e1fc2f085, type: 3}
   _model: {fileID: 0}

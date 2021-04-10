@@ -1,13 +1,18 @@
-﻿using Info;
+﻿using GameSystems;
+using GameSystems.DialogSystem;
+using Info;
+using Logic;
+using QuestGenerator;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI {
-
     public class DialogScreen : MonoBehaviour {
 
-        [SerializeField] protected GameObject Screen;
+        [SerializeField] private GameObject Screen;
+        [SerializeField] private TradingScreen TradingScreen;
 
-        [Header("Dialogs Screen Specs")]
+        [Header("Dialogs Screen Specs")] 
         [SerializeField] private Text SpeakerName;
         [SerializeField] private Text PlayerName;
         [SerializeField] private Text SpeakerText;
@@ -15,22 +20,62 @@ namespace UI {
         [SerializeField] private Transform AnswersGrid;
         [SerializeField] private PlayerSpeechLine LinePrefab;
 
+        private Character _playerData;
+        private Character _currentSpeaker;
         private DialogNode _currentNode;
+        private Quest _lastGeneratedQuest;
+        
+        // Special dialog cases
         private bool _startTrading;
+        private bool _generateQuest;
 
-        public void OnOpenDialog(NPCInfo speakerData, DialogNode startingNode) {
+        public void OnOpenDialog(Character speakerData, DialogNode startingNode) {
             if (GameLogic.Instance.GameIsPaused) return;
             GameLogic.Instance.PauseGame();
             Screen.SetActive(true);
 
-            _startTrading = false;
+            _currentSpeaker = speakerData;
             _currentNode = startingNode;
-            SetCurrentNodeToUI();        
+            _startTrading = startingNode is TradeActionNode;
+            SetCurrentNodeToUI();
+            
+            PlayerName.text = _playerData.Name;
+            SpeakerName.text = _currentSpeaker.Name;
+        }
+
+        public void OnDialogLineClick(int index) {
+            // Close dialog or start action if required
+            if (_generateQuest && index == ((QuestActionNode) _currentNode).AcceptQuestAnswerIndex) {
+                // TODO Add generated quest to player's journal
+            }
+            if (_currentNode.IsEndingNode) {
+                OnCloseDialog();
+                if (_startTrading) TradingScreen.OpenTradeMenu(_currentSpeaker.Inventory);
+                return;
+            }
+
+            // Choose next dialog node
+            _currentNode = _currentNode.NextNodes[index];
+            _startTrading = _currentNode is TradeActionNode;
+            _generateQuest = _currentNode is QuestActionNode;
+            SetCurrentNodeToUI();
+        }
+
+        private void Awake() {
+            var player = FindObjectOfType<PlayerController>();
+            _playerData = player.gameObject.GetComponent<Character>();
         }
 
         private void SetCurrentNodeToUI() {
-            // TODO Set player name
-            // TODO Set NPC name
+            if (_generateQuest) {
+                var questGiverData = (NpcInfo) _currentSpeaker.CharacterData;
+                var playerData = (PlayerInfo) _playerData.CharacterData;
+                
+                _lastGeneratedQuest = GameLogic.Instance.MainQuestGenerator.GenerateNewQuest(questGiverData, playerData);
+                
+                // TODO Fill UI according to generated quest
+            }
+            
             SpeakerText.text = _currentNode.NodeText;
 
             // Clear old answers
@@ -38,12 +83,12 @@ namespace UI {
                 Destroy(answerUI.gameObject);
             }
 
-            int i = 0;
+            var i = 0;
             foreach (var answer in _currentNode.PossibleAnswers) {
                 var answerUI = Instantiate(LinePrefab, AnswersGrid);
                 answerUI.SetSpeechLine(answer, i, this);
                 i++;
-            }   
+            }
         }
 
         private void OnCloseDialog() {
@@ -51,28 +96,5 @@ namespace UI {
             GameLogic.Instance.ResumeGame();
         }
 
-        public void OnDialogLineClick(int index) {
-            // Close dialog and start action if required
-            if (_currentNode.IsEndingNode) {
-                OnCloseDialog();
-                
-                if (_startTrading) {
-                    // TODO Start trading
-                }
-
-                return;
-            }
-
-            if (_currentNode is TradeActionNode) {
-                // Start trading action after dialog
-                _startTrading = true;
-            }
-
-            // Choose next dialog node
-            _currentNode = NextNodes[index];
-            SetCurrentNodeToUI();     
-        }
-
     }
-
 }

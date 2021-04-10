@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b76dbd07d7164121b0f221775e26da56, type: 3}
+  m_Name: Axe1
+  m_EditorClassIdentifier: 
+  _name: Rusty Axe
+  _description: A rusty axe. Still used by some guards around here.
+  _price: 4
+  _iconSprite: {fileID: 21300000, guid: a201fb0441294fb42bb8830f5a934d2f, type: 3}
+  _model: {fileID: 193736, guid: 1d57899ee20f82343aa0fec3900f9ac2, type: 3}
+  _damage: 8
